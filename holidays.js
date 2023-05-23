@@ -1,5 +1,5 @@
-import { format } from 'date-fns';
-import { subDays, addDays } from 'date-fns/esm';
+import { format, parse } from 'date-fns';
+import { subDays, addDays, addYears } from 'date-fns/esm';
 
 export function easterDay(y) {
   const c = Math.floor(y / 100);
@@ -22,7 +22,7 @@ export function easterDay(y) {
   return new Date(y, m - 1, d);
 }
 
-export function getHolidaysBr(y) {
+export function getHolidaysNational(y) {
   const anoNovo = new Date(y, 0, 1);
   const carnaval = subDays(easterDay(y), 47);
   const paixaoCristo = subDays(easterDay(y), 2);
@@ -73,4 +73,23 @@ export function getHolidaysBr(y) {
     },
     { m: natal, dia: 'Natal', d: format(natal, 'dd/MM/yyyy') },
   ];
+}
+
+export function getHolidayBetweenDates(date, dateTo) {
+  const dateStart = parse(date, 'yyyy-MM-dd', new Date());
+  const dateEnd = parse(dateTo, 'yyyy-MM-dd', new Date());
+  const datesHoliday = [];
+
+  let currentDate = dateStart;
+  while (
+    dateEnd > currentDate ||
+    currentDate.getFullYear() === dateEnd.getFullYear()
+  ) {
+    const year = currentDate.getFullYear();
+    const holidays = getHolidaysNational(year);
+    datesHoliday.push(...holidays);
+    currentDate = addYears(currentDate, 1);
+  }
+
+  return datesHoliday;
 }
