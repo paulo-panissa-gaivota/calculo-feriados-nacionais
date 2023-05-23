@@ -1,0 +1,10 @@
+{
+  "name": "js",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "date-fns": "^2.30.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4"
+  }
+}
