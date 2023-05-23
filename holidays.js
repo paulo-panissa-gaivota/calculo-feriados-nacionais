@@ -75,7 +75,7 @@ export function getHolidaysNational(y) {
   ];
 }
 
-export function getHolidayBetweenDates(date, dateTo) {
+export function getBetweenDates(date, dateTo) {
   const dateStart = parse(date, 'yyyy-MM-dd', new Date());
   const dateEnd = parse(dateTo, 'yyyy-MM-dd', new Date());
   const datesHoliday = [];
